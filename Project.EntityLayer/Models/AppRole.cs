@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Project.EntityLayer.Models
 {
-    public class AppUser : IdentityUser<int>, IEntity
+    public class AppRole : IdentityRole<int>, IEntity
     {
-        public AppUser()
+        public AppRole()
         {
             InsertedDate = DateTime.Now;
             Status = DataStatus.Inserted;
@@ -21,6 +21,6 @@ namespace Project.EntityLayer.Models
         public DateTime? DeletedDate { get; set; }
         public DataStatus Status { get; set; }
 
-        public virtual AppRole AppRole { get; set; }
+        public virtual AppUser AppUser { get; set; }
     }
 }

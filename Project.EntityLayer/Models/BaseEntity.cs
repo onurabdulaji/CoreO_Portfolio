@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Project.EntityLayer.Enums;
+﻿using Project.EntityLayer.Enums;
 using Project.EntityLayer.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -9,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Project.EntityLayer.Models
 {
-    public class AppUser : IdentityUser<int>, IEntity
+    public class BaseEntity : IEntity
     {
-        public AppUser()
+        public BaseEntity()
         {
             InsertedDate = DateTime.Now;
             Status = DataStatus.Inserted;
@@ -20,7 +19,5 @@ namespace Project.EntityLayer.Models
         public DateTime? UpdatedDate { get; set; }
         public DateTime? DeletedDate { get; set; }
         public DataStatus Status { get; set; }
-
-        public virtual AppRole AppRole { get; set; }
     }
 }
