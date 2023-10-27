@@ -1,7 +1,8 @@
+using Microsoft.AspNetCore.Builder;
 using Project.BusinessLayer.DependencyManagements;
 using Project.BusinessLayer.Resolvers;
 
-WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
@@ -11,7 +12,7 @@ builder.Services.DependencyManagers();
 
 builder.Services.AddControllersWithViews();
 
-WebApplication app = builder.Build();
+var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -31,5 +32,9 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapControllerRoute(
+     name: "areas",
+    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+
 
 app.Run();

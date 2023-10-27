@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Project.DataAccessLayer.Configurations;
 using Project.EntityLayer.Models;
 using System;
 using System.Collections.Generic;
@@ -18,6 +20,8 @@ namespace Project.DataAccessLayer.Context
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+            builder.ApplyConfiguration(new AppUserConfiguration());
+            builder.ApplyConfiguration(new AppRoleConfiguration());
         }
 
         public DbSet<AppUser> AppUsers { get; set; }

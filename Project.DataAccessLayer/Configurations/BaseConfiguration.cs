@@ -11,9 +11,10 @@ namespace Project.DataAccessLayer.Configurations
 {
     public abstract class BaseConfiguration<T> : IEntityTypeConfiguration<T> where T : class, IEntity
     {
-        public void Configure(EntityTypeBuilder<T> builder)
+        public virtual void Configure(EntityTypeBuilder<T> builder)
         {
             // Hazir Bulunsun Ileri Donem Icin
+
         }
     }
 }

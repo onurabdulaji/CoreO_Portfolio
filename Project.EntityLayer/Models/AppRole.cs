@@ -21,6 +21,6 @@ namespace Project.EntityLayer.Models
         public DateTime? DeletedDate { get; set; }
         public DataStatus Status { get; set; }
 
-        public virtual AppUser AppUser { get; set; }
+        // Diğer özellikler
     }
 }
