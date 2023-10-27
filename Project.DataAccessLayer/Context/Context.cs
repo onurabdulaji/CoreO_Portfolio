@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Project.DataAccessLayer.Context
 {
-    public class Context : IdentityDbContext<AppUser, AppRole, int>
+    public class MyContext : IdentityDbContext<AppUser, AppRole, int>
     {
-        public Context(DbContextOptions<Context> opt) : base(opt)
+        public MyContext(DbContextOptions<MyContext> opt) : base(opt)
         {
             //
         }
