@@ -48,7 +48,7 @@ namespace Project.MVCUI.Areas.Admin.Controllers
 			}
 			else
 			{
-				ModelState.AddModelError(string.Empty, "Something went wrong. Please try again.");
+				ModelState.AddModelError(string.Empty, "Hey , Sorry but you have entered something wrong , Result Failed.");
 			}
 			return View(signInVM);
 		}
