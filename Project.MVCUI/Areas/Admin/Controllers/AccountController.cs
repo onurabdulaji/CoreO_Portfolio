@@ -1,30 +1,56 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Project.BusinessLayer.ManagerServices.Abstracts;
 using Project.DTOLayer.DTOS.AdminDTOs;
 using Project.EntityLayer.Models;
 
 namespace Project.MVCUI.Areas.Admin.Controllers
 {
-    [Area("Admin")]
-    [AllowAnonymous]
-    [Route("Admin/SignIn")]
-    public class AccountController : Controller
-    {
-        IAppUserManager _iappUserManager;
+	[Area("Admin")]
+	[AllowAnonymous]
+	public class AccountController : Controller
+	{
+		IAppUserManager _iappUserManager;
 
-        public AccountController(IAppUserManager iappUserManager)
-        {
-            _iappUserManager = iappUserManager;
-        }
+		public AccountController(IAppUserManager iappUserManager)
+		{
+			_iappUserManager = iappUserManager;
+		}
 
-        public IActionResult SignIn(SignUpVM signInVM)
-        {
-            //var newUser = new AppUser
-            //{
+		public IActionResult Index()
+		{
+			return View();
+		}
 
-            //}
-            return View();
-        }
-    }
+
+		[HttpGet]
+		public IActionResult SignUp()
+		{
+			return View();
+		}
+
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public async Task<IActionResult> SignUp(SignUpVM signInVM)
+		{
+			var newUser = new AppUser
+			{
+				FirstName = signInVM.Name,
+				LastName = signInVM.Surname,
+				Email = signInVM.Mail,
+				UserName = signInVM.Username
+			};
+			bool result = await _iappUserManager.CreateUser(newUser, signInVM.Password);
+			if (result)
+			{
+				return RedirectToAction("SignIn", "Account");
+			}
+			else
+			{
+				ModelState.AddModelError(string.Empty, "Something went wrong. Please try again.");
+			}
+			return View(signInVM);
+		}
+	}
 }

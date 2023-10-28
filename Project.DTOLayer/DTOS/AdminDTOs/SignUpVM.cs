@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Project.DTOLayer.DTOS.AdminDTOs
 {
@@ -20,6 +16,9 @@ namespace Project.DTOLayer.DTOS.AdminDTOs
 
         [Required]
         public string Mail { get; set; }
+
+        [Required]
+        public IFormFile Image { get; set; }
 
         [Required]
         public string Password { get; set; }
