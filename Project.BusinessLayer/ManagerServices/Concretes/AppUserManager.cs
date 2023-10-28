@@ -17,5 +17,11 @@ namespace Project.BusinessLayer.ManagerServices.Concretes
         {
             _iappUserRepository = iappUserRepository;
         }
+
+        public async Task<bool> CreateUser(AppUser item, string Password)
+        {
+            // BL'daki CreateUser metodu icin UserRepository'in AddUser metodu ile User
+            return await _iappUserRepository.AddUser(item, Password);
+        }
     }
 }

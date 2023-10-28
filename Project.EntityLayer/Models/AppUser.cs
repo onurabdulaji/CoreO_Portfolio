@@ -16,6 +16,9 @@ namespace Project.EntityLayer.Models
             InsertedDate = DateTime.Now;
             Status = DataStatus.Inserted;
         }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string? ImageUrl { get; set; }
         public DateTime InsertedDate { get; set; }
         public DateTime? UpdatedDate { get; set; }
         public DateTime? DeletedDate { get; set; }

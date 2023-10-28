@@ -9,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.ContextManagers();
 builder.Services.IdentityManagers();
 builder.Services.DependencyManagers();
+builder.Services.AddAutoMapper(typeof(Program));
 
 builder.Services.AddControllersWithViews();
 
