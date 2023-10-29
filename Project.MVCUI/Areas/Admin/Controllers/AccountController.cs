@@ -44,7 +44,7 @@ namespace Project.MVCUI.Areas.Admin.Controllers
             bool result = await _iappUserManager.CreateUser(newUser, signInVM.Password);
             if (result)
             {
-                return RedirectToAction("SignIn", "Account");
+                return RedirectToAction("ConfirmAccount", "Account");
             }
             else
             {

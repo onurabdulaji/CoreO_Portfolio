@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Project.BusinessLayer.HelpersManagerServices.Abstracts;
+using Project.BusinessLayer.HelpersManagerServices.Concretes;
 using Project.BusinessLayer.ManagerServices.Abstracts;
 using Project.BusinessLayer.ManagerServices.Concretes;
 using Project.DataAccessLayer.Repositories.Abstracts;
@@ -25,6 +27,14 @@ namespace Project.BusinessLayer.DependencyManagements
 
             services.AddScoped<IAppRoleRepository, AppRoleRepository>();
             services.AddScoped<IAppUserRepository, AppUserRepository>();
+
+            // Helpers
+            services.AddScoped<IEmailBuilderService, EmailBuilderManager>();
+            services.AddScoped<IEmailContentService, EmailContentManager>();
+            services.AddScoped<IEmailSenderService, EmailSenderManager>();
+            services.AddScoped<IRandomCodeGeneratorService, RandomCodeGeneratorManager>();
+            services.AddScoped<ISmptClientService, SmptClientManager>();
+
 
 
             return services;

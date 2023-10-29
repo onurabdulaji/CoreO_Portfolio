@@ -19,6 +19,8 @@ namespace Project.EntityLayer.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string? ImageUrl { get; set; }
+        public bool IsEmailConfirmed { get; set; }
+        public string EmailConfirmationToken { get; set; }
         public DateTime InsertedDate { get; set; }
         public DateTime? UpdatedDate { get; set; }
         public DateTime? DeletedDate { get; set; }

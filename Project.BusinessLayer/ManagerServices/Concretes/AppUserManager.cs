@@ -1,4 +1,5 @@
-﻿using Project.BusinessLayer.ManagerServices.Abstracts;
+﻿using Project.BusinessLayer.HelpersManagerServices.Abstracts;
+using Project.BusinessLayer.ManagerServices.Abstracts;
 using Project.DataAccessLayer.Repositories.Abstracts;
 using Project.DataAccessLayer.Repositories.Concretes;
 using Project.EntityLayer.Models;
@@ -13,19 +14,33 @@ namespace Project.BusinessLayer.ManagerServices.Concretes
     public class AppUserManager : BaseManager<AppUser>, IAppUserManager
     {
         IAppUserRepository _iappUserRepository; // Burada alir DAL'daki Interface'i Entity icin.
+        private readonly IEmailSenderService _emailSenderService;
+        private readonly IRandomCodeGeneratorService _randomCodeGeneratorService;
 
-        public AppUserManager(IAppUserRepository iappUserRepository) : base(iappUserRepository)
+        public AppUserManager(IAppUserRepository iappUserRepository, IEmailSenderService emailSenderService, IRandomCodeGeneratorService randomCodeGeneratorService) : base(iappUserRepository)
         {
             _iappUserRepository = iappUserRepository;
+            _emailSenderService = emailSenderService;
+            _randomCodeGeneratorService = randomCodeGeneratorService;
         }
 
         public async Task<bool> CreateUser(AppUser item, string Password)
         {
-            if (item.Email == null && item.UserName == null && Password == null) // Validation , farkli seyler de yapilabilir
+            int code = _randomCodeGeneratorService.GenerateRandomCode();
+            if (item.Email == null && item.UserName == null && Password == null)
             {
                 return false;
             }
-            return await _iappUserRepository.AddUser(item, Password);
+            var result = await _iappUserRepository.AddUser(item, Password);
+            if (result)
+            {
+                await _emailSenderService.SendEmailAsync("onurabdulaji@gmail.com", item.Email, "Admin Verification Code", "Your confirmation code to complete the registration process: " + code);
+            }
+            else
+            {
+                return false;
+            }
+            return result;
         }
     }
 }
